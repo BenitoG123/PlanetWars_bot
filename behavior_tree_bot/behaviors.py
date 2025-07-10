@@ -3,7 +3,9 @@ sys.path.insert(0, '../')
 from planet_wars import issue_order
 
 
-def attack_weakest_enemy_planet(state):
+def attack_weakest_enemy_planet(state): 
+    '''this only attacks from one planet to another and always sends half of ships at planet'''
+
     # (1) If we currently have a fleet in flight, abort plan.
     if len(state.my_fleets()) >= 1:
         return False
@@ -23,6 +25,8 @@ def attack_weakest_enemy_planet(state):
 
 
 def spread_to_weakest_neutral_planet(state):
+    '''this only attacks from one planet to another and always sends half of ships at planet'''
+    
     # (1) If we currently have a fleet in flight, just do nothing.
     if len(state.my_fleets()) >= 1:
         return False
