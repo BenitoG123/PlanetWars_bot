@@ -2,30 +2,28 @@ import sys
 sys.path.insert(0, '../')
 from planet_wars import issue_order
 import math
+import logging
+
 
 def all_attack_weakest_enemy_planet(state): 
     '''this attacks one enemy planet with every planet'''
 
     # (2) Find total ships
     total_planet_ships = sum(planet.num_ships for planet in state.my_planets())
+    logging.info(f"total_planet_ships: {total_planet_ships}")
+    
 
     # (3) Find the weakest enemy planet.
     weakest_planet = min(state.enemy_planets(), key=lambda t: t.num_ships, default=None)
 
     #calculate what percent of ships each planet needs to send and add 3 percent
-    required_percent = weakest_planet/total_planet_ships + 3
-
-    if not weakest_planet:
-        # No legal destination
-        return False
-    else:
-        try: #currently attacks one at a time, maybe switch having multiple planets attack
-            for planet in state.my_planets():
-                issue_order(state, planet.ID, weakest_planet.ID, planet.num_ships * required_percent)
-
-        except StopIteration:
-            # (4) Send required percent of ships from all planets to the weakest enemy planet.
-            return 
+    required_percent = weakest_planet.num_ships/total_planet_ships + 0.05
+    
+    for planet in state.my_planets():
+        logging.info(f"planet_ships: {planet.num_ships}")
+        logging.info(f"sent ships: {math.floor(planet.num_ships * required_percent)}")
+        issue_order(state, planet.ID, weakest_planet.ID, math.floor(planet.num_ships * required_percent))
+    return True
 
 
 def attack_weakest_enemy_planet(state): 
@@ -37,6 +35,7 @@ def attack_weakest_enemy_planet(state):
 
     # (2) Find my strongest planet.
     strongest_planet = max(state.my_planets(), key=lambda t: t.num_ships, default=None)
+    logging.info(f"strongest planet: {strongest_planet}")
 
     # (3) Find the weakest enemy planet.
     weakest_planet = min(state.enemy_planets(), key=lambda t: t.num_ships, default=None)
@@ -69,9 +68,42 @@ def spread_to_weakest_neutral_planet(state):
         # (4) Send half the ships from my strongest planet to the weakest enemy planet.
         return issue_order(state, strongest_planet.ID, weakest_planet.ID, strongest_planet.num_ships / 2)
 
-def spread_to_neutral_with_all(state):
+def all_attack_weakest_neutral_planet(state): 
+    '''this attacks one neutral planet with every planet'''
+
+    # (2) Find total ships
+    total_planet_ships = sum(planet.num_ships for planet in state.my_planets())
+    logging.info(f"total_planet_ships: {total_planet_ships}")
+    
+
+    # (3) Find the weakest enemy planet.
+    weakest_planet = min(state.neutral_planets(), key=lambda t: t.num_ships, default=None)
+
+    #calculate what percent of ships each planet needs to send and add 3 percent
+    required_percent = weakest_planet.num_ships/total_planet_ships + 0.05
+    
+    for planet in state.my_planets():
+        issue_order(state, planet.ID, weakest_planet.ID, math.floor(planet.num_ships * required_percent))
+    return True
+
+def defend_planets(state):
+    '''this defends one planet with every other planet'''
+
+    planet_list = sorted(state.my_planets(), key=lambda p: p.num_ships)
+
+    # (3) Find the weakest enemy planet.
+    weakest_planet = min(state.my_planets(), key=lambda t: t.num_ships, default=None)
+
+    #planet_list.remove(weakest_planet) # remove weakest planet since it would just send to itself
+    
+    for planet in planet_list:
+        issue_order(state, planet.ID, weakest_planet.ID, math.floor(planet.num_ships * 0.05))
+    return True
+
+
+'''def spread_to_neutral_with_all(state):
     my_planets = iter(sorted(state.my_planets(), key=lambda p: p.num_ships))
-    median_planet = my_planets[math.floor(len(my_planet)/2)]
+    #median_planet = my_planets[math.floor(len(my_planet)/2)]
 
     neutral_planets = [planet for planet in state.neutral_planets()
                       if not any(fleet.destination_planet == planet.ID for fleet in state.my_fleets())]
@@ -96,7 +128,7 @@ def spread_to_neutral_with_all(state):
                 target_planet = next(target_planets)
 
     except StopIteration:
-        return 
+        return '''
 
 def spread_to_neutral_with_half(state):
     my_planets = iter(sorted(state.my_planets(), key=lambda p: p.num_ships))
@@ -113,7 +145,7 @@ def spread_to_neutral_with_half(state):
         target_planet = next(target_planets)
         sent_ships = 0
         while True:
-            required_ships = target_planet.num_ships + 1
+            required_ships = target_planet.num_ships + 0.01
             
             #If planet has above average ships, send 30% of ships
             if my_planet.num_ships > median_planet.num_ships:
