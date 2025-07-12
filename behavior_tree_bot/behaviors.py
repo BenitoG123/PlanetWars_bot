@@ -125,13 +125,93 @@ def all_attack_weakest_neutral_planet(state):
             smallest_ship_count = ships
 
     #calculate what percent of ships each planet needs to send and add 3 percent
-    required_percent = weakest_planet.num_ships/total_planet_ships + 0.05
+    required_percent = smallest_ship_count/total_planet_ships + 0.01
     
     for planet in state.my_planets():
         logging.info(f"planet_ships: {planet.num_ships}")
         logging.info(f"sent ships: {math.floor(planet.num_ships * required_percent)}")
         issue_order(state, planet.ID, weakest_planet.ID, math.floor(planet.num_ships * required_percent))
     return True
+
+def same_percent_attack(state, my_ships, enemy_planet, enemy_ships):
+
+    required_percent = enemy_ships/my_ships + 0.01
+    for planet in state.my_planets():
+        logging.info(f"planet_ships: {planet.num_ships}")
+        logging.info(f"sent ships: {math.floor(planet.num_ships * required_percent)}")
+        issue_order(state, planet.ID, enemy_planet.ID, math.floor(planet.num_ships * required_percent))
+    return True
+
+def differnt_percent_attack(state, enemy_planet, enemy_ships):
+
+    ordered_planets = sorted(state.my_planets(), key=lambda p: p.num_ships, reverse=True)
+
+    required_percent = 0.5 #start at 50%
+    for planet in ordered_planets:
+        if planet.num_ships <= 10: #don't attack if only 10 ships
+            continue
+        if enemy_ships <= 0:
+            break
+        #logging.info(f"planet_ships: {planet.num_ships}")
+        #logging.info(f"sent ships: {math.floor(planet.num_ships * required_percent)}")
+        if planet.num_ships > enemy_ships + 20:
+            issue_order(state, planet.ID, enemy_planet.ID, enemy_ships + 5)
+        else:
+            send_ships = math.floor(planet.num_ships*required_percent)
+            issue_order(state, planet.ID, enemy_planet.ID, send_ships)
+            enemy_ships -= send_ships
+            required_percent -= 0.1
+            if required_percent <= 0.2: #minimum 20%
+                required_percent = 0.2
+
+    return True
+
+
+def total_planet_distance(state, destination_planet):
+    distance = 0
+    for planet in state.my_planets():
+        #logging.info(f"my planet x {planet.x}")
+        #logging.info(f"my planet y {planet.y}")
+        #logging.info(f"destination planet x {destination_planet.x}")
+        #logging.info(f"destination planet y {destination_planet.y}")
+        distance += math.sqrt((destination_planet.x - planet.x)**2 + (destination_planet.y - planet.y)**2)
+    return distance
+
+def all_attack_closest_neutral_planet(state): 
+    '''this attacks one neutral planet with every planet'''
+
+    # (2) Find total ships
+    
+    closest_planet = None
+    shortest_distance = 1000000
+    for neutral in state.neutral_planets():
+        distance = total_planet_distance(state, neutral)
+        if distance < shortest_distance:
+            shortest_distance = distance
+            closest_planet = neutral
+
+    differnt_percent_attack(state, closest_planet, closest_planet.num_ships)
+
+    return True
+
+def all_attack_closest_enemy_planet(state): 
+    '''this attacks one neutral planet with every planet'''
+
+    # (2) Find total ships
+    
+    closest_planet = None
+    shortest_distance = 1000000
+    for enemy in state.enemy_planets():
+        distance = total_planet_distance(state, enemy)
+        if  distance< shortest_distance:
+            shortest_distance = distance
+            closest_planet = enemy
+
+    differnt_percent_attack(state, closest_planet, closest_planet.num_ships)
+
+    return True
+
+
 
 def defend_planets(state):
     '''this defends one planet with every other planet'''

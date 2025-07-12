@@ -30,17 +30,21 @@ def setup_behavior_tree():
     any_neutral = Check(if_neutral_planet_available)
     higher_growth_check = Check(have_highest_growth)
     not_biggest_fleet = Check(dont_have_largest_fleet)
+    close_neutral_not_too_big = Check(closest_neutral_not_too_big)
     
     # actions
-    attack_enemy = Action(all_attack_weakest_enemy_planet)
-    attack_neutral = Action(all_attack_weakest_neutral_planet)
+    attack_weak_enemy = Action(all_attack_weakest_enemy_planet)
+    attack_weak_neutral = Action(all_attack_weakest_neutral_planet)
     defend_action = Action(defend_planets)
+    attack_close_neutral = Action(all_attack_closest_neutral_planet)
+    attack_close_enemy = Action(all_attack_closest_enemy_planet)
     
     #sequences
     initial_offensive_plan = Sequence(name='Initial Offensive Strategy')
     initial_neutral_plan = Sequence(name='Initial Neutral Attack Plan')
     defend_sequence = Sequence(name="Defense Plan (don't die)")
     remaining_neutrals_sequence = Sequence(name="Attack Remaining Neutrals")
+    get_close_neutrals_sequence = Sequence(name="Attack Close Neutrals")
 
     #selectors
     root = Selector(name='High Level Ordering of Strategies')
@@ -51,19 +55,19 @@ def setup_behavior_tree():
    
 
     #construct Tree
-    root.child_nodes = [initial_offensive_plan, second_level_strategy]
-
-    initial_offensive_plan.child_nodes = [weak_enemy_check, attack_enemy]
+    #attempt 2 distance and neutrals
+    root.child_nodes = [get_close_neutrals_sequence, attack_close_enemy]
+    get_close_neutrals_sequence.child_nodes = [any_neutral, attack_close_neutral]
+    #attempt 1 weak enemies
+    '''root.child_nodes = [initial_offensive_plan, second_level_strategy]
+    initial_offensive_plan.child_nodes = [weak_enemy_check, attack_weak_enemy]
     second_level_strategy.child_nodes = [initial_neutral_plan, defend_sequence, third_level_strategy]
-
-    initial_neutral_plan.child_nodes = [weak_neutral_check, attack_neutral]
+    initial_neutral_plan.child_nodes = [weak_neutral_check, attack_weak_neutral]
     defend_sequence.child_nodes = [weak_owned_planet_check, defend_action]
     third_level_strategy.child_nodes = [remaining_neutrals_sequence, stall_or_attack_selector]
-
-    remaining_neutrals_sequence.child_nodes = [any_neutral, attack_neutral]
-    stall_or_attack_selector.child_nodes = [stall_strategy, attack_enemy]
-
-    stall_strategy.child_nodes = [higher_growth_check, not_biggest_fleet, defend_action]
+    remaining_neutrals_sequence.child_nodes = [any_neutral, attack_weak_neutral]
+    stall_or_attack_selector.child_nodes = [stall_strategy, attack_weak_enemy]
+    stall_strategy.child_nodes = [higher_growth_check, not_biggest_fleet, defend_action]'''
 
 
     logging.info('\n' + root.tree_to_string())
