@@ -23,54 +23,48 @@ from planet_wars import PlanetWars, finish_turn
 # of winning against all the 5 opponent bots
 def setup_behavior_tree():
 
-    # Top-down construction of behavior tree
-    root = Selector(name='High Level Ordering of Strategies')
-
-    initial_offensive_plan = Sequence(name='Initial Offensive Strategy')
+    # checks
     weak_enemy_check = Check(if_weak_enemy_planet_available)
-    attack_enemy = Action(all_attack_weakest_enemy_planet)
-    initial_offensive_plan.child_nodes = [weak_enemy_check, attack_enemy]
-   
-
-    second_level_strategy = Selector(name='Second Level Strategy')
-
-    initial_neutral_plan = Sequence(name='Initial Neutral Attack Plan')
     weak_neutral_check = Check(if_weak_neutral_planet_available)
-    attack_neutral = Action(all_attack_weakest_neutral_planet)
-    initial_neutral_plan.child_nodes = [weak_neutral_check, attack_neutral]
-
-    #initial_offensive_plan.child_nodes = [weak_neutral_check, attack_neutral]
-
-    defend_sequence = Sequence(name="Defense Plan (don't die)")
     weak_owned_planet_check = Check(if_weak_owned_planet)
-    defend_action = Action(defend_planets)
-    defend_sequence.child_nodes = [weak_owned_planet_check, defend_action]
-
-    third_level_strategy = Selector(name='Third Level Strategy')
-
-    remaining_neutrals_sequence = Sequence(name="Attack Remaining Neutrals")
     any_neutral = Check(if_neutral_planet_available)
-    remaining_neutrals_sequence.child_nodes = [any_neutral, attack_neutral]
-
-    stall_or_attack_selector = Selector(name='Stall or Attack (end game)')
-
-    stall_strategy = Sequence(name='Stall Strategy')
     higher_growth_check = Check(have_highest_growth)
     not_biggest_fleet = Check(dont_have_largest_fleet)
-    stall_strategy.child_nodes = [higher_growth_check, not_biggest_fleet, defend_action]
+    
+    # actions
+    attack_enemy = Action(all_attack_weakest_enemy_planet)
+    attack_neutral = Action(all_attack_weakest_neutral_planet)
+    defend_action = Action(defend_planets)
+    
+    #sequences
+    initial_offensive_plan = Sequence(name='Initial Offensive Strategy')
+    initial_neutral_plan = Sequence(name='Initial Neutral Attack Plan')
+    defend_sequence = Sequence(name="Defense Plan (don't die)")
+    remaining_neutrals_sequence = Sequence(name="Attack Remaining Neutrals")
 
-    stall_or_attack_selector.child_nodes = [stall_strategy, attack_enemy]
+    #selectors
+    root = Selector(name='High Level Ordering of Strategies')
+    second_level_strategy = Selector(name='Second Level Strategy')
+    third_level_strategy = Selector(name='Third Level Strategy')
+    stall_or_attack_selector = Selector(name='Stall or Attack (end game)')
+    stall_strategy = Sequence(name='Stall Strategy')
+   
 
-    third_level_strategy.child_nodes = [remaining_neutrals_sequence, stall_or_attack_selector]
+    #construct Tree
+    root.child_nodes = [initial_offensive_plan, second_level_strategy]
 
+    initial_offensive_plan.child_nodes = [weak_enemy_check, attack_enemy]
     second_level_strategy.child_nodes = [initial_neutral_plan, defend_sequence, third_level_strategy]
 
-    '''spread_sequence = Sequence(name='Spread Strategy')
-    neutral_planet_check = Check(if_neutral_planet_available)
-    spread_action = Action(spread_to_weakest_neutral_planet)
-    spread_sequence.child_nodes = [neutral_planet_check, spread_action]'''
+    initial_neutral_plan.child_nodes = [weak_neutral_check, attack_neutral]
+    defend_sequence.child_nodes = [weak_owned_planet_check, defend_action]
+    third_level_strategy.child_nodes = [remaining_neutrals_sequence, stall_or_attack_selector]
 
-    root.child_nodes = [initial_offensive_plan, second_level_strategy]
+    remaining_neutrals_sequence.child_nodes = [any_neutral, attack_neutral]
+    stall_or_attack_selector.child_nodes = [stall_strategy, attack_enemy]
+
+    stall_strategy.child_nodes = [higher_growth_check, not_biggest_fleet, defend_action]
+
 
     logging.info('\n' + root.tree_to_string())
     return root

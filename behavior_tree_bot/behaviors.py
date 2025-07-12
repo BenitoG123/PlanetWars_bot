@@ -8,13 +8,34 @@ import logging
 def all_attack_weakest_enemy_planet(state): 
     '''this attacks one enemy planet with every planet'''
 
-    # (2) Find total ships
+        # (2) Find total ships
     total_planet_ships = sum(planet.num_ships for planet in state.my_planets())
     logging.info(f"total_planet_ships: {total_planet_ships}")
     
+    ID_to_planet = {}
+    for planet in state.enemy_planets(): 
+        ID_to_planet[planet.ID] = (planet, planet.num_ships)
 
-    # (3) Find the weakest enemy planet.
-    weakest_planet = min(state.enemy_planets(), key=lambda t: t.num_ships, default=None)
+    remove_these_planets = set()
+    
+    for id, (n_planet, ships) in ID_to_planet.items():
+        logging.info(f"{id} {n_planet} {ships}")
+        for my_fleet in state.my_fleets():
+            if my_fleet.destination_planet == id:
+                if ships - my_fleet.num_ships <= 0:
+                    remove_these_planets.add(id) #get rid of planets we already sent enough fleets to
+                else:
+                    ID_to_planet[id] = (planet, ships - my_fleet.num_ships)
+
+    for id in remove_these_planets:
+        ID_to_planet.pop(id)
+    weakest_planet = None
+    smallest_ship_count = 100000
+
+    for planet, ships in ID_to_planet.values():
+        if ships < smallest_ship_count:
+            weakest_planet = planet
+            smallest_ship_count = ships
 
     #calculate what percent of ships each planet needs to send and add 3 percent
     required_percent = weakest_planet.num_ships/total_planet_ships + 0.05
@@ -26,8 +47,8 @@ def all_attack_weakest_enemy_planet(state):
     return True
 
 
-def attack_weakest_enemy_planet(state): 
-    '''this only attacks from one planet to another and always sends half of ships at planet'''
+'''def attack_weakest_enemy_planet(state): 
+    #this only attacks from one planet to another and always sends half of ships at planet
 
     # (1) If we currently have a fleet in flight, abort plan.
     if len(state.my_fleets()) >= 1:
@@ -46,10 +67,10 @@ def attack_weakest_enemy_planet(state):
     else:
         # (4) Send half the ships from my strongest planet to the weakest enemy planet.
         return issue_order(state, strongest_planet.ID, weakest_planet.ID, strongest_planet.num_ships / 2)
+'''
 
-
-def spread_to_weakest_neutral_planet(state):
-    '''this only attacks from one planet to another and always sends half of ships at planet'''
+'''def spread_to_weakest_neutral_planet(state):
+    #this only attacks from one planet to another and always sends half of ships at planet
     
     # (1) If we currently have a fleet in flight, just do nothing.
     if len(state.my_fleets()) >= 1:
@@ -67,6 +88,8 @@ def spread_to_weakest_neutral_planet(state):
     else:
         # (4) Send half the ships from my strongest planet to the weakest enemy planet.
         return issue_order(state, strongest_planet.ID, weakest_planet.ID, strongest_planet.num_ships / 2)
+'''
+
 
 def all_attack_weakest_neutral_planet(state): 
     '''this attacks one neutral planet with every planet'''
@@ -75,14 +98,38 @@ def all_attack_weakest_neutral_planet(state):
     total_planet_ships = sum(planet.num_ships for planet in state.my_planets())
     logging.info(f"total_planet_ships: {total_planet_ships}")
     
+    ID_to_planet = {}
+    for planet in state.neutral_planets(): 
+        ID_to_planet[planet.ID] = (planet, planet.num_ships)
 
-    # (3) Find the weakest enemy planet.
-    weakest_planet = min(state.neutral_planets(), key=lambda t: t.num_ships, default=None)
+    remove_these_planets = set()
+    
+    for id, (n_planet, ships) in ID_to_planet.items():
+        logging.info(f"{id} {n_planet} {ships}")
+        for my_fleet in state.my_fleets():
+            if my_fleet.destination_planet == id:
+                if ships - my_fleet.num_ships <= 0:
+                    remove_these_planets.add(id) #get rid of planets we already sent enough fleets to
+                else:
+                    ID_to_planet[id] = (planet, ships - my_fleet.num_ships)
+
+    for id in remove_these_planets:
+        ID_to_planet.pop(id)
+
+    weakest_planet = None
+    smallest_ship_count = 100000
+
+    for planet, ships in ID_to_planet.values():
+        if ships < smallest_ship_count:
+            weakest_planet = planet
+            smallest_ship_count = ships
 
     #calculate what percent of ships each planet needs to send and add 3 percent
     required_percent = weakest_planet.num_ships/total_planet_ships + 0.05
     
     for planet in state.my_planets():
+        logging.info(f"planet_ships: {planet.num_ships}")
+        logging.info(f"sent ships: {math.floor(planet.num_ships * required_percent)}")
         issue_order(state, planet.ID, weakest_planet.ID, math.floor(planet.num_ships * required_percent))
     return True
 
@@ -93,8 +140,6 @@ def defend_planets(state):
 
     # (3) Find the weakest enemy planet.
     weakest_planet = min(state.my_planets(), key=lambda t: t.num_ships, default=None)
-
-    #planet_list.remove(weakest_planet) # remove weakest planet since it would just send to itself
     
     for planet in planet_list:
         issue_order(state, planet.ID, weakest_planet.ID, math.floor(planet.num_ships * 0.05))
