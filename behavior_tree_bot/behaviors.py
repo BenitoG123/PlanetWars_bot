@@ -37,7 +37,7 @@ def attack_neutral_planet_near(state):
     strongest = list[0]
     for neutral in neutral_planets:
         distance = state.distance(neutral.ID, strongest.ID)
-        if (distance < 5) and (neutral.num_ships + 2 < strongest.num_ships):
+        if (distance < 10) and (neutral.num_ships + 2 < strongest.num_ships):
             issue_order(state, strongest.ID, neutral.ID, neutral.num_ships + 2)
     return True
 
@@ -49,7 +49,7 @@ def attack_enemy_planet_near(state):
     strongest = list[0]
     for enemy in enemy_planets:
         distance = state.distance(enemy.ID, strongest.ID)
-        if (distance < 5) and (enemy.num_ships + 2 < strongest.num_ships):
+        if (distance < 10) and (enemy.num_ships + 2 < strongest.num_ships):
             issue_order(state, strongest.ID, enemy.ID, enemy.num_ships + 2)
     return True
 
@@ -401,8 +401,8 @@ def defend_planets(state): #send 25% of ships from strong to weak
         if length <= 1:
             break
         issue_order(state, planet_list[0].ID, planet_list[length - 1].ID, math.floor(planet_list[0].num_ships * 0.25))
-        planet_list.pop(0)
         planet_list.pop(length - 1)
+        planet_list.pop(0)
     return True
 
 

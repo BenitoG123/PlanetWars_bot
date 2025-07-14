@@ -1,6 +1,11 @@
 import logging
 import math
 
+def havent_lost_yet(state):
+    if len(state.my_planets()) == 0:
+        return False
+    return True
+
 def have_highest_growth(state): # checks if I get more ships per turn than opponent
     return sum(planet.growth_rate for planet in state.my_planets()) \
            > sum(planet.growth_rate for planet in state.enemy_planets()) \
@@ -90,7 +95,7 @@ def if_neutral_planet_near(state):
     strongest = list[0]
     for neutral in neutral_planets:
         distance = state.distance(neutral.ID, strongest.ID)
-        if (distance < 5) and (neutral.num_ships + 2 < strongest.num_ships):
+        if (distance < 10) and (neutral.num_ships + 2 < strongest.num_ships):
             return True
     return False
 
@@ -106,7 +111,7 @@ def if_enemy_planet_near(state):
     strongest = list[0]
     for enemy in enemy_planets:
         distance = state.distance(enemy.ID, strongest.ID)
-        if (distance < 5) and (enemy.num_ships + 2 < strongest.num_ships):
+        if (distance < 10) and (enemy.num_ships + 2 < strongest.num_ships):
             return True
     return False
 
