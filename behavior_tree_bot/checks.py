@@ -12,24 +12,60 @@ def any_close_enemy_planet(state): #currently 5 turns away or less
                  return True
     return False
 
-def get_vulnerable_owned_planet(state): #currently 5 turns away or less
-    vulnerable = []
+def get_frontline_planets(state): #currently 5 turns away or less
+    frontline = []
     for enemy in state.enemy_planets():
         for mine in state.my_planets():
              if state.distance(enemy.ID, mine.ID) <= 5:
-                 vulnerable.append(mine)
-    return vulnerable
+                 frontline.append(mine)
+    return frontline
 
-def any_close_enemy_fleet(state):
-    IDs = []
+def get_attacked_planets(state): #within 5 turns
+    IDs = {}
+    vulnerable = {} #planet -> ships attacking it
     for planet in state.my_planets():
-      IDs.append(planet.ID)
+      IDs[planet.ID] = planet
     for fleet in state.enemy_fleets():
         if fleet.destination_planet in IDs:
-            if fleet.turns_remaining <= 6:
+            if fleet.turns_remaining <= 5:
+              if fleet.destination_planet in vulnerable.keys():
+                  vulnerable[IDs[fleet.destination_planet]] += fleet.num_ships
+              else:
+                vulnerable[IDs[fleet.destination_planet]] = fleet.num_ships
+              logging.info(f"turns to my planet {fleet.turns_remaining}")
+              
+    return vulnerable
+
+def any_planet_attacked(state):
+    if len(get_attacked_planets(state)) > 0:
+        return True
+    else:
+        return False
+
+def if_need_reinforcement(state):
+    vulnerable = get_attacked_planets(state)
+
+    for planet, ships in vulnerable.items():
+        for fleet in state.my_fleets():
+            if fleet.destination_planet == planet.ID:
+                ships -= fleet.num_ships
+        if planet.num_ships <= ships:
+            return True
+    return False
+
+def any_close_enemy_fleet(state): #within 5 turns
+    IDs = {}
+    #vulnerable = []
+    for planet in state.my_planets():
+      IDs[planet.ID] = planet
+    for fleet in state.enemy_fleets():
+        if fleet.destination_planet in IDs:
+            if fleet.turns_remaining <= 5:
+              #vulnerable.append(IDs[fleet.destination_planet])
               logging.info(f"turns to my planet {fleet.turns_remaining}")
               return True
     return False
+
            
 def my_plant_vulnerable(state): #determine if one of my planets could be taken over by current enemy fleet
     return min(planet.num_ships for planet in state.my_planets()) \
@@ -43,10 +79,92 @@ def dont_have_largest_fleet(state):
              + sum(fleet.num_ships for fleet in state.enemy_fleets()) + 5
 
 def if_neutral_planet_available(state):
-    for source in state.my_planets():
-      for destination in state.my_planets():
-        logging.info(f"distance from {source.ID} to {destination.ID} is {state.distance(source.ID, destination.ID)}")
-    return any(state.neutral_planets())
+    neutral_planets = [planet for planet in state.neutral_planets()
+                       if not any(fleet.destination_planet == planet.ID for fleet in state.my_fleets())]
+    return len(neutral_planets) > 0
+
+def if_neutral_planet_near(state):
+    neutral_planets = [planet for planet in state.neutral_planets()
+                       if not any(fleet.destination_planet == planet.ID for fleet in state.my_fleets())]
+    list = sorted(state.my_planets(), key=lambda p: p.num_ships, reverse=True)
+    strongest = list[0]
+    for neutral in neutral_planets:
+        distance = state.distance(neutral.ID, strongest.ID)
+        if (distance < 5) and (neutral.num_ships + 2 < strongest.num_ships):
+            return True
+    return False
+
+def if_enemy_planet_available(state):
+    enemy_planets = [planet for planet in state.enemy_planets()
+                       if not any(fleet.destination_planet == planet.ID for fleet in state.my_fleets())]
+    return len(enemy_planets) > 0
+
+def if_enemy_planet_near(state):
+    enemy_planets = [planet for planet in state.enemy_planets()
+                       if not any(fleet.destination_planet == planet.ID for fleet in state.my_fleets())]
+    list = sorted(state.my_planets(), key=lambda p: p.num_ships, reverse=True)
+    strongest = list[0]
+    for enemy in enemy_planets:
+        distance = state.distance(enemy.ID, strongest.ID)
+        if (distance < 5) and (enemy.num_ships + 2 < strongest.num_ships):
+            return True
+    return False
+
+def strength(state, p):
+        return p.num_ships \
+               + sum(fleet.num_ships for fleet in state.my_fleets() if fleet.destination_planet == p.ID) \
+               - sum(fleet.num_ships for fleet in state.enemy_fleets() if fleet.destination_planet == p.ID)
+
+
+def not_already_defending(state):
+    list = sorted(state.my_planets(), key=lambda p: p.num_ships)
+    weakest = list[0]
+    for fleet in state.my_fleets():
+        if fleet.destination_planet == weakest.ID:
+            return True
+    return False
+
+def any_other_planets(state):
+    list = state.not_my_planets()
+    if len(list) > 0:
+        return True
+    else:
+        return False
+
+def if_close_neutral(state):
+    neutral_planets = [planet for planet in state.neutral_planets()
+                       if not any(fleet.destination_planet == planet.ID for fleet in state.my_fleets())]
+    neutral_planets.sort(key=lambda p: p.num_ships)
+    sorted(state.my_planets(), key=lambda p: p.num_ships, reverse=True)
+
+def if_weak_neutral_available(state):
+    neutral_planets = sorted(state.neutral_planets(), key=lambda p: p.num_ships)
+    IDs = {}
+    for p in neutral_planets:
+        IDs[p.ID] = p
+    for fleet in state.my_fleets():
+        if fleet.destination_planet in IDs.keys():
+            IDs.pop(fleet.destination_planet)
+    for my_planet in state.my_planets():
+        for neutral in IDs.values():
+          if my_planet.num_ships > (neutral.num_ships + 2):
+              return True
+    return False
+          
+def if_weak_enemy_available(state): #doesn't send more than one fleet to attack, could be bad
+    enemy_planets = sorted(state.enemy_planets(), key=lambda p: p.num_ships)
+    IDs = {}
+    for p in enemy_planets:
+        IDs[p.ID] = p
+    for fleet in state.my_fleets():
+        if fleet.destination_planet in IDs.keys():
+            IDs.pop(fleet.destination_planet)
+    for my_planet in state.my_planets():
+        for enemy in IDs.values():
+          distance = state.distance(my_planet.ID, enemy.ID)
+          if my_planet.num_ships > (enemy.num_ships + (distance * enemy.growth_rate) + 2):
+              return True
+    return False
 
 def about_to_lose(state):
    return sum(planet.num_ships for planet in state.my_planets()) <= 0
@@ -81,7 +199,7 @@ def closest_neutral_not_too_big(state):
         False'''
 
 
-def if_weak_neutral_planet_available(state): #currently at 30%
+'''def if_weak_neutral_planet_available(state): #currently at 30%
     
     if if_neutral_planet_available(state): #is there any neutrals?
         pass
@@ -130,7 +248,7 @@ def if_weak_neutral_planet_available(state): #currently at 30%
             logging.info(f"new weakest planet {weakest_planet}")
     logging.info(f"weakest planet {weakest_planet}")
     #calculate what percent of ships each planet needs to send and add 3 percent
-    return weakest_planet.num_ships < total_planet_ships * 0.3
+    return weakest_planet.num_ships < total_planet_ships * 0.3'''
 
 '''def if_weak_neutral_planet_available(state): #currently at 10%
     total_planet_ships = sum(planet.num_ships for planet in state.my_planets()) \
@@ -172,7 +290,7 @@ def if_weak_owned_planet(state):
     return min(ships for ships in planet_ships.values()) <= (total_planet_ships/len(state.my_planets()) * 0.7) #70% of average
    
 
-def if_weak_enemy_planet_available(state): #currently at 10%
+'''def if_weak_enemy_planet_available(state): #currently at 10%
     
     # (2) Find total ships
     total_planet_ships = sum(planet.num_ships for planet in state.my_planets())
@@ -218,7 +336,7 @@ def if_weak_enemy_planet_available(state): #currently at 10%
             logging.info(f"new weakest planet {weakest_planet}")
     logging.info(f"weakest planet {weakest_planet}")
     #calculate what percent of ships each planet needs to send and add 3 percent
-    return weakest_planet.num_ships < total_planet_ships * 0.1
+    return weakest_planet.num_ships < total_planet_ships * 0.1'''
 
 
 '''def if_weak_enemy_planet_available(state): #currently at 10%

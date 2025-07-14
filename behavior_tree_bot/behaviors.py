@@ -4,6 +4,184 @@ from planet_wars import issue_order
 import math
 import logging
 
+def do_nothing(state):
+    return True
+
+
+def get_attacked_planets(state): #within 5 turns
+    IDs = {}
+    vulnerable = {}
+    for planet in state.my_planets():
+      IDs[planet.ID] = planet
+    for fleet in state.enemy_fleets():
+        if fleet.destination_planet in IDs:
+            if fleet.turns_remaining <= 5:
+              if fleet.destination_planet in vulnerable.keys():
+                  vulnerable[IDs[fleet.destination_planet]] += fleet.num_ships
+              else:
+                vulnerable[IDs[fleet.destination_planet]] = fleet.num_ships
+              logging.info(f"turns to my planet {fleet.turns_remaining}")
+              
+    return vulnerable
+
+def strength(state, p):
+        return p.num_ships \
+               + sum(fleet.num_ships for fleet in state.my_fleets() if fleet.destination_planet == p.ID) \
+               - sum(fleet.num_ships for fleet in state.enemy_fleets() if fleet.destination_planet == p.ID)
+
+
+def attack_neutral_planet_near(state):
+    neutral_planets = [planet for planet in state.neutral_planets()
+                       if not any(fleet.destination_planet == planet.ID for fleet in state.my_fleets())]
+    list = sorted(state.my_planets(), key=lambda p: p.num_ships, reverse=True)
+    strongest = list[0]
+    for neutral in neutral_planets:
+        distance = state.distance(neutral.ID, strongest.ID)
+        if (distance < 5) and (neutral.num_ships + 2 < strongest.num_ships):
+            issue_order(state, strongest.ID, neutral.ID, neutral.num_ships + 2)
+    return True
+
+
+def attack_enemy_planet_near(state):
+    enemy_planets = [planet for planet in state.enemy_planets()
+                       if not any(fleet.destination_planet == planet.ID for fleet in state.my_fleets())]
+    list = sorted(state.my_planets(), key=lambda p: p.num_ships, reverse=True)
+    strongest = list[0]
+    for enemy in enemy_planets:
+        distance = state.distance(enemy.ID, strongest.ID)
+        if (distance < 5) and (enemy.num_ships + 2 < strongest.num_ships):
+            issue_order(state, strongest.ID, enemy.ID, enemy.num_ships + 2)
+    return True
+
+def attack_not_mine(state):
+    my_list = sorted(state.my_planets(), key=lambda p: p.num_ships, reverse=True)
+    target_list = sorted(state.my_planets(), key=lambda p: p.num_ships)
+    strong = my_list[0]
+    weak = target_list[0]
+
+    if weak.num_ships + (weak.growth_rate * state.distance(weak.ID, strong.ID)) + 1 < strong.num_ships:
+        issue_order(state, strong.ID, weak.ID, weak.num_ships + ((weak.growth_rate * state.distance(weak.ID, strong.ID)) + 1))
+    else:
+        issue_order(state, strong.ID, weak.ID, math.floor(strong.num_ships * 0.5))
+    return True
+
+
+
+def defend_vulnerable(state):
+    vulnerable = get_attacked_planets(state)
+    strong_planets = []
+    for planet in state.my_planets():
+        if planet not in vulnerable.keys():
+            strong_planets.append(planet)
+    strong_planets = sorted(strong_planets, key=lambda p: p.num_ships)
+    for w_planet, ships in vulnerable.items:
+        if w_planet.ships <= ships:
+            needed_ships = ships - w_planet.ships + 1
+            for s_planet in strong_planets:
+                if s_planet.ships > needed_ships:
+                    issue_order(state, s_planet.ID, w_planet.ID, needed_ships)
+    return True
+
+def defend_against_fleets(state):
+    frontline = get_frontline_planets(state)
+    #planet_order = sorted(state.my_planets(), key=lambda p: p.num_ships, reverse=True)
+    attacked = {}
+    for fleet in state.enemy_fleets():
+        if fleet.destination_planet in attacked.keys():
+            attacked[fleet.destination_planet] += fleet.num_ships
+        else:
+            attacked[fleet.destination_planet] = fleet.num_ships
+    for planet in state.my_planets():
+        if planet.ID in attacked.keys():
+            if planet.num_ships < attacked[planet.ID] + 1:
+                done = False
+                for f_planet in frontline:
+                    if done == False:
+                        if f_planet.num_ships > planet.num_ships - attacked[planet.ID] + 1:
+                            issue_order(state, f_planet.ID, planet.ID, planet.num_ships - attacked[planet.ID] + 1)
+    return True
+
+
+
+def get_frontline_planets(state): #currently 5 turns away or less
+    frontline = set()
+    for enemy in state.enemy_planets():
+        for mine in state.my_planets():
+            if state.distance(enemy.ID, mine.ID) <= 5:
+                frontline.add(mine)
+    for neutral in state.neutral_planets():
+        for mine in state.my_planets():
+            if state.distance(neutral.ID, mine.ID) <= 5:
+                frontline.add(mine)
+    return frontline
+
+def reinforce_frontline(state):
+    frontline = get_frontline_planets(state)
+    front_planets = len(frontline)
+    for planet in state.my_planets():
+        if planet not in frontline:
+            for f_planet in frontline:
+                if planet.num_ships > 1:
+                    issue_order(state, planet.ID, f_planet.ID, math.floor(planet.num_ships/front_planets)-1)
+    return True
+
+
+'''def attack_capturable_neutrals(state):
+    frontline = get_frontline_planets(state)
+    neutrals = sorted(state.neutral_planets(), key=lambda p: p.num_ships)
+    for neutral in neutrals:
+        for f_planet in frontline:
+            if f_planet.num_ships > neutral.num_ships + 2:
+                issue_order(state, f_planet.ID, neutral.ID, neutral.num_ships + 2)
+                break'''
+
+def attack_weak_neutrals(state):
+    neutral_planets = sorted(state.neutral_planets(), key=lambda p: p.num_ships)
+    IDs = {}
+    for p in neutral_planets:
+        IDs[p.ID] = p
+    for fleet in state.my_fleets():
+        if fleet.destination_planet in IDs.keys():
+            IDs.pop(fleet.destination_planet)
+    
+    for neutral in IDs.values():
+        for my_planet in state.my_planets():
+          if my_planet.num_ships > (neutral.num_ships + 2):
+            logging.info(f"my planet {my_planet.ID}")
+            logging.info(f"neutral planet {my_planet.ID}")
+            issue_order(state, my_planet.ID, neutral.ID, neutral.num_ships + 2)
+            break
+    return True
+
+def attack_weak_enemies(state):
+    enemy_planets = sorted(state.enemy_planets(), key=lambda p: p.num_ships)
+    IDs = {}
+    for p in enemy_planets:
+        IDs[p.ID] = p
+    for fleet in state.my_fleets():
+        if fleet.destination_planet in IDs.keys():
+            IDs.pop(fleet.destination_planet)
+    already_attacked = []
+    for my_planet in state.my_planets():
+        for enemy in IDs.values():
+          if my_planet.num_ships > (enemy.num_ships + 2):
+              if enemy not in already_attacked:
+                issue_order(state, my_planet.ID, enemy.ID, enemy.num_ships + 2)
+                already_attacked.append(enemy)
+    return True
+
+'''def attack_capturable_enemies(state):
+    frontline = get_frontline_planets(state)
+    enemies = sorted(state.enemy_planets(), key=lambda p: p.num_ships)
+    for enemy in enemies:
+        ships = enemy.num_ships
+        for f_planet in frontline:
+            ships += (state.distance(f_planet.ID, enemy.ID) * enemy.growth_rate)
+            if f_planet.num_ships > enemy.num_ships + 5:
+                issue_order(state, f_planet.ID, enemy.ID, enemy.num_ships + 5)
+                break'''
+
+
 
 def all_attack_weakest_enemy_planet(state): 
     '''this attacks one enemy planet with every planet'''
@@ -213,16 +391,18 @@ def all_attack_closest_enemy_planet(state):
 
 
 
-def defend_planets(state):
-    '''this defends one planet with every other planet'''
+def defend_planets(state): #send 25% of ships from strong to weak
+    '''above average defends below average'''
 
     planet_list = sorted(state.my_planets(), key=lambda p: p.num_ships)
-
-    # (3) Find the weakest enemy planet.
-    weakest_planet = min(state.my_planets(), key=lambda t: t.num_ships, default=None)
     
-    for planet in planet_list:
-        issue_order(state, planet.ID, weakest_planet.ID, math.floor(planet.num_ships * 0.05))
+    while(True):
+        length = len(planet_list)
+        if length <= 1:
+            break
+        issue_order(state, planet_list[0].ID, planet_list[length - 1].ID, math.floor(planet_list[0].num_ships * 0.25))
+        planet_list.pop(0)
+        planet_list.pop(length - 1)
     return True
 
 
