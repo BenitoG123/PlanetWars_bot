@@ -121,8 +121,9 @@ def closest_planet(state, p):
 
 def opportunity_check(state):
     for planet in state.my_planets():
+        strength = my_strength(state, planet)
         enemy = closest_planet(state, planet)
-        if planet.num_ships >= enemy.num_ships * 2:
+        if (planet.num_ships >= enemy.num_ships * 2) and (strength >= enemy.num_ships * 2):
             return True
         
     return False
