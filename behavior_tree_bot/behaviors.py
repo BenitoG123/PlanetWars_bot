@@ -96,9 +96,9 @@ def ok_enemy_attack(state):
     
     for enemy, enemy_power in enemy_planets:
         for mine in my_planets:
-            if (enemy_power < mine.num_ships):
+            if (enemy_power + 1 < mine.num_ships):
                 logging.info("ok attack order went through")
-                issue_order(state, mine.ID, enemy.ID, enemy_power)
+                issue_order(state, mine.ID, enemy.ID, enemy_power + 1)
                 
                 break
     return True
