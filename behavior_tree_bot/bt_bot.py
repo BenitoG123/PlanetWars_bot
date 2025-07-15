@@ -24,53 +24,45 @@ from planet_wars import PlanetWars, finish_turn
 def setup_behavior_tree():
 
     # checks
-    not_defending = Check(not_already_defending)
+    #not_defending = Check(not_already_defending)
     not_dead = Check(havent_lost_yet)
+    can_i_go_for_it = Check(opportunity_check)
     #need_to_defend = Check(if_need_reinforcement)
-    enemy_near = Check(if_enemy_planet_near)
-    neutral_near = Check(if_neutral_planet_near)
+    easy_enemy = Check(should_attack_enemy)
+    easy_neutral = Check(should_attack_neutral)
+    ok_enemy = Check(can_attack_enemy)
+    ok_neutral = Check(can_attack_neutral)
     not_won_yet = Check(any_other_planets)
-    #any_close_fleet = Check(any_close_enemy_fleet)
-    #weak_enemy_check = Check(if_weak_enemy_planet_available)
-    #weak_neutral_check = Check(if_weak_neutral_planet_available)
-    #weak_owned_planet_check = Check(if_weak_owned_planet)
     any_neutral = Check(if_neutral_planet_available)
     any_enemy = Check(if_enemy_planet_available)
-    #any_weak_neutral = Check(if_weak_neutral_available)
-    #any_weak_enemy = Check(if_weak_enemy_available)
-    #higher_growth_check = Check(have_highest_growth)
-    #not_biggest_fleet = Check(dont_have_largest_fleet)
-    #close_neutral_not_too_big = Check(closest_neutral_not_too_big)
+    biggest_fleet = Check(have_largest_fleet)
     
     # actions
-    attack_enemies = Action(attack_enemy_planet_near)
-    attack_neutrals = Action(attack_neutral_planet_near)
-    attack_any = Action(attack_not_mine)
-    defend = Action(defend_planets)
+    attack_best_enemies = Action(best_enemy_attack)
+    attack_best_neutrals = Action(best_neutral_attack)
+    attack_ok_enemies = Action(best_enemy_attack)
+    attack_ok_neutrals = Action(best_neutral_attack)
+    go_for_it = Action(opportunity_attack)
+    #attack_any = Action(attack_not_mine)
+    total_defend = Action(defend_all_vulnerable)
     #reinforce = Action(reinforce_frontline)
     nothing = Action(do_nothing)
-    #attack_weak_enemy = Action(all_attack_weakest_enemy_planet)
-    #attack_weak_neutral = Action(all_attack_weakest_neutral_planet)
-    #defend_action = Action(defend_planets)
-    #attack_close_neutral = Action(all_attack_closest_neutral_planet)
-    #attack_close_enemy = Action(all_attack_closest_enemy_planet)
     
     #sequences
-    attack_enemy_sequence = Sequence(name='Enemy Attack Sequence')
-    attack_neutral_sequence = Sequence(name='Neutral Attack Sequence')
+    #root = Sequence(name='High Level Ordering of Strategies')
+    attack_best_enemy_sequence = Sequence(name='Primary Enemy Attack Sequence')
+    attack_best_neutral_sequence = Sequence(name='Primary Neutral Attack Sequence')
+    attack_ok_enemy_sequence = Sequence(name='Secondary Enemy Attack Sequence')
+    attack_ok_neutral_sequence = Sequence(name='Secondary Neutral Attack Sequence')
     defend_self_sequence = Sequence(name='Defense Sequence')
-    do_something = Sequence(name='Do something semi-usefull')
-    #defense = Sequence(name='Defense Sequence')
-    #neutral_attack = Sequence(name='Neutral Attack Sequence')
-    #enemy_attack = Sequence(name='Enemy Attack Sequence')
-    #initial_offensive_plan = Sequence(name='Initial Offensive Strategy')
-    #initial_neutral_plan = Sequence(name='Initial Neutral Attack Plan')
-    #defend_sequence = Sequence(name="Defense Plan (don't die)")
-    #remaining_neutrals_sequence = Sequence(name="Attack Remaining Neutrals")
-    #get_close_neutrals_sequence = Sequence(name="Attack Close Neutrals")
+    am_i_ahead = Sequence(name='Do I have the advantage sequence')
+    last_ditch = Sequence(name='Last Ditch Attack')
+    #do_something = Sequence(name='Do something semi-usefull')
 
     #selectors
     root = Selector(name='High Level Ordering of Strategies')
+    #round1 = Selector(name='First Priority')
+    #round2 = Selector(name='Second Priority')
     #second_level_strategy = Selector(name='Second Level Strategy')
     #third_level_strategy = Selector(name='Third Level Strategy')
     #stall_or_attack_selector = Selector(name='Stall or Attack (end game)')
@@ -84,12 +76,17 @@ def setup_behavior_tree():
     #construct Tree
 
     #I lost count
-    root.child_nodes = [attack_enemy_sequence, attack_neutral_sequence, defend_self_sequence, do_something]
-    #root.child_nodes = [attack_enemy_sequence, attack_neutral_sequence, defend_self_sequence, nothing]
-    attack_enemy_sequence.child_nodes = [not_dead, any_enemy, enemy_near, attack_enemies]
-    attack_neutral_sequence.child_nodes = [not_dead, any_neutral, neutral_near, attack_neutrals]
-    defend_self_sequence.child_nodes = [not_dead, not_defending, defend]
-    do_something.child_nodes = [not_dead, not_won_yet, attack_any]
+    #root.child_nodes = [round1, round2]
+    #round1.child_nodes = [attack_enemy_sequence, attack_neutral_sequence, defend_self_sequence, do_something]
+    #round2.child_nodes = [attack_enemy_sequence, attack_neutral_sequence, defend_self_sequence, do_something]
+    root.child_nodes = [am_i_ahead, attack_best_enemy_sequence, attack_best_neutral_sequence, attack_ok_neutral_sequence, attack_ok_enemy_sequence, defend_self_sequence, nothing]
+    am_i_ahead.child_nodes = [any_enemy, can_i_go_for_it, go_for_it]
+    attack_best_enemy_sequence.child_nodes = [not_won_yet, not_dead, any_enemy, easy_enemy, attack_best_enemies]
+    attack_best_neutral_sequence.child_nodes = [not_won_yet, not_dead, any_neutral, easy_neutral, attack_best_neutrals]
+    attack_ok_enemy_sequence.child_nodes = [not_won_yet, not_dead, any_enemy, ok_enemy, attack_ok_enemies]
+    attack_ok_neutral_sequence.child_nodes = [not_won_yet, not_dead, any_neutral, ok_neutral, attack_ok_neutrals]
+    defend_self_sequence.child_nodes = [not_won_yet, not_dead, total_defend]
+    #do_something.child_nodes = [not_dead, not_won_yet, attack_any]
 
 
     #attempt 3 or 4ish

@@ -1,1733 +1,2310 @@
 INFO:root:
 Selector: High Level Ordering of Strategies
-| Sequence: Enemy Attack Sequence
+| Sequence: Do I have the advantage sequence
+| | Check: if_enemy_planet_available
+| | Check: opportunity_check
+| | Action: opportunity_attack
+| Sequence: Primary Enemy Attack Sequence
+| | Check: any_other_planets
 | | Check: havent_lost_yet
 | | Check: if_enemy_planet_available
-| | Check: if_enemy_planet_near
-| | Action: attack_enemy_planet_near
-| Sequence: Neutral Attack Sequence
+| | Check: should_attack_enemy
+| | Action: best_enemy_attack
+| Sequence: Primary Neutral Attack Sequence
+| | Check: any_other_planets
 | | Check: havent_lost_yet
 | | Check: if_neutral_planet_available
-| | Check: if_neutral_planet_near
-| | Action: attack_neutral_planet_near
-| Sequence: Defense Sequence
-| | Check: havent_lost_yet
-| | Check: not_already_defending
-| | Action: defend_planets
-| Sequence: Do something semi-usefull
-| | Check: havent_lost_yet
+| | Check: should_attack_neutral
+| | Action: best_neutral_attack
+| Sequence: Secondary Neutral Attack Sequence
 | | Check: any_other_planets
-| | Action: attack_not_mine
+| | Check: havent_lost_yet
+| | Check: if_neutral_planet_available
+| | Check: can_attack_neutral
+| | Action: best_neutral_attack
+| Sequence: Secondary Enemy Attack Sequence
+| | Check: any_other_planets
+| | Check: havent_lost_yet
+| | Check: if_enemy_planet_available
+| | Check: can_attack_enemy
+| | Action: best_enemy_attack
+| Sequence: Defense Sequence
+| | Check: any_other_planets
+| | Check: havent_lost_yet
+| | Action: defend_all_vulnerable
+| Action: do_nothing
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Success
-DEBUG:root:Executing:Action: attack_neutral_planet_near
-DEBUG:root:Order:1 0 63.0
-DEBUG:root:Order:1 3 14.0
-DEBUG:root:Order:1 6 6.0
-DEBUG:root:Bad order:1 17.0 68.0
-DEBUG:root:Bad order:1 17.0 40.0
-DEBUG:root:Bad order:1 17.0 49.0
-DEBUG:root:Bad order:1 17.0 68.0
-DEBUG:root:Bad order:1 17.0 86.0
-DEBUG:root:Order:1 20 9.0
-DEBUG:root:Bad order:1 8.0 48.0
-DEBUG:root:Result: Action: attack_neutral_planet_near -> Success
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:1 1 6
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:1 1 9
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_neutral_planet_available
 DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+INFO:root:attack neutral (1, 18)
+DEBUG:root:Order:1 18 6.0
+INFO:root:attack neutral (1, 12)
+DEBUG:root:Order:1 12 14.0
+INFO:root:attack neutral (1, 6)
+DEBUG:root:Order:1 6 24.0
+INFO:root:attack neutral (1, 19)
+DEBUG:root:Bad order:1 56.0 57.0
+INFO:root:attack neutral (1, 21)
+DEBUG:root:Bad order:1 56.0 60.0
+INFO:root:attack neutral (1, 13)
+DEBUG:root:Bad order:1 56.0 61.0
+INFO:root:attack neutral (1, 15)
+DEBUG:root:Bad order:1 56.0 61.0
+INFO:root:attack neutral (1, 4)
+DEBUG:root:Bad order:1 56.0 83.0
+INFO:root:attack neutral (1, 7)
+DEBUG:root:Bad order:1 56.0 85.0
+INFO:root:attack neutral (1, 10)
+DEBUG:root:Bad order:1 56.0 86.0
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 2 30
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 2 18
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:1 1 11
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:1 3 15.0
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_neutral_planet_available
 DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:3 1 1
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
 DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 2 18
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:1 6 21.0
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:6 20 1
-DEBUG:root:Order:1 3 1
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:6 3 1
-DEBUG:root:Order:1 20 2
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:3 0 15
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_neutral_planet_available
 DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:0 20 1
-DEBUG:root:Order:6 1 3
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
 DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:0 20 2
-DEBUG:root:Order:6 1 3
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 2 13
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
 DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:0 20 3
-DEBUG:root:Order:3 6 6
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:0 20 4
-DEBUG:root:Order:3 6 5
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Success
-DEBUG:root:Executing:Action: attack_neutral_planet_near
-DEBUG:root:Order:20 9 40.0
-DEBUG:root:Result: Action: attack_neutral_planet_near -> Success
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:20 1 2
-DEBUG:root:Order:0 6 5
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Success
-DEBUG:root:Executing:Action: attack_neutral_planet_near
-DEBUG:root:Order:1 13 49.0
-DEBUG:root:Bad order:1 4.0 48.0
-DEBUG:root:Result: Action: attack_neutral_planet_near -> Success
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:1 6 3
-DEBUG:root:Order:20 3 3
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:20 6 4
-DEBUG:root:Order:0 3 8
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:6 1 10.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:20 6 5
-DEBUG:root:Order:3 0 10
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:6 9 12.0
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 2 43.0
-DEBUG:root:Bad order:0 16.0 51.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:9 6 2
-DEBUG:root:Order:0 3 5
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:6 13 7.0
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:6 1 30.0
-DEBUG:root:Order:6 20 3.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_neutral_planet_available
 DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Success
-DEBUG:root:Executing:Action: attack_neutral_planet_near
-DEBUG:root:Order:3 22 48.0
-DEBUG:root:Result: Action: attack_neutral_planet_near -> Success
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+INFO:root:attack neutral (1, 11)
+DEBUG:root:Order:1 11 3.0
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
 DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 5 19.0
-DEBUG:root:Order:0 10 9.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:3 6 2
-DEBUG:root:Order:0 9 3
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:6 13 19.0
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
 DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_neutral_planet_available
 DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 17 1
+DEBUG:root:Order:18 17 1
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 17 4
+DEBUG:root:Order:18 17 4
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 17 7
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 11 1
+DEBUG:root:Order:12 11 1
+DEBUG:root:Order:18 11 1
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 11 9
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 11 16
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:13 6 3
-DEBUG:root:Order:0 3 5
-DEBUG:root:Result: Action: defend_planets -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_enemy
+DEBUG:root:Result: Check: can_attack_enemy -> Success
+DEBUG:root:Executing:Action: best_enemy_attack
+DEBUG:root:Result: Action: best_enemy_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 11 13
+DEBUG:root:Order:12 11 13
+DEBUG:root:Order:18 11 13
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 11 21
+DEBUG:root:Order:12 11 21
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_enemy
+DEBUG:root:Result: Check: can_attack_enemy -> Success
+DEBUG:root:Executing:Action: best_enemy_attack
+DEBUG:root:Result: Action: best_enemy_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_enemy
+DEBUG:root:Result: Check: can_attack_enemy -> Success
+DEBUG:root:Executing:Action: best_enemy_attack
+DEBUG:root:Result: Action: best_enemy_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_enemy
+DEBUG:root:Result: Check: can_attack_enemy -> Success
+DEBUG:root:Executing:Action: best_enemy_attack
+DEBUG:root:Result: Action: best_enemy_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_enemy
+DEBUG:root:Result: Check: can_attack_enemy -> Success
+DEBUG:root:Executing:Action: best_enemy_attack
+DEBUG:root:Result: Action: best_enemy_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 18 21
+DEBUG:root:Order:12 11 19
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 9 34
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_enemy
+DEBUG:root:Result: Check: can_attack_enemy -> Success
+DEBUG:root:Executing:Action: best_enemy_attack
+DEBUG:root:Result: Action: best_enemy_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_enemy
+DEBUG:root:Result: Check: can_attack_enemy -> Success
+DEBUG:root:Executing:Action: best_enemy_attack
+DEBUG:root:Result: Action: best_enemy_attack -> Success
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:11 18 33
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+INFO:root:attack neutral (1, 0)
+DEBUG:root:Order:1 0 39.0
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:6 18 10
+DEBUG:root:Order:11 18 10
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 17 34
+DEBUG:root:Order:11 18 13
+DEBUG:root:Order:12 17 34
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 18 16
+DEBUG:root:Order:11 18 16
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:11 18 19
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 6 19
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 9 1
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 9 3
+DEBUG:root:Order:11 5 34
+DEBUG:root:Order:12 6 22
+DEBUG:root:Order:17 9 3
+DEBUG:root:Order:18 6 22
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 9 4
+DEBUG:root:Order:12 6 24
+DEBUG:root:Order:17 9 4
+DEBUG:root:Order:18 6 24
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 9 6
+DEBUG:root:Order:17 9 6
+DEBUG:root:Order:18 6 25
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 9 7
+DEBUG:root:Order:17 9 7
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 9 9
+DEBUG:root:Order:17 9 9
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 6 30
+DEBUG:root:Order:2 9 9
+DEBUG:root:Order:17 9 9
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 9 6
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:11 5 45
+DEBUG:root:Order:12 6 33
+DEBUG:root:Order:18 6 33
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:2 5 18
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:0 5 19
+DEBUG:root:Order:1 6 7
+DEBUG:root:Order:2 5 19
+DEBUG:root:Order:9 5 19
+DEBUG:root:Order:11 5 19
+DEBUG:root:Order:12 6 7
+DEBUG:root:Order:18 6 7
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 6 9
+DEBUG:root:Order:12 6 9
+DEBUG:root:Order:18 6 9
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:6 18 13.0
+DEBUG:root:Bad order:6 2.0 14.0
+DEBUG:root:Bad order:6 2.0 14.0
+DEBUG:root:Order:5 17 2.0
+DEBUG:root:Order:5 12 17.0
+DEBUG:root:Bad order:5 0.0 18.0
+DEBUG:root:Order:9 11 1.0
+DEBUG:root:Order:9 1 27.0
+DEBUG:root:Bad order:9 16.0 29.0
+DEBUG:root:Bad order:9 16.0 39.0
+DEBUG:root:Order:2 9 2.0
+DEBUG:root:Bad order:2 26.0 27.0
+DEBUG:root:Order:1 5 25.0
+DEBUG:root:Order:11 5 17.0
+DEBUG:root:Order:12 5 15.0
+DEBUG:root:Order:17 5 14.0
+DEBUG:root:Order:0 5 12.0
+DEBUG:root:Order:18 5 11.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
 DEBUG:root:Result: Sequence: Defense Sequence -> Success
 DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:6 1 11.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:6 0 5.0
+DEBUG:root:Order:6 17 6.0
+DEBUG:root:Order:6 11 8.0
+DEBUG:root:Bad order:6 8.0 16.0
+DEBUG:root:Bad order:6 8.0 17.0
+DEBUG:root:Bad order:6 8.0 24.0
+DEBUG:root:Bad order:6 8.0 26.0
+DEBUG:root:Order:1 2 5.0
+DEBUG:root:Order:2 2 1.0
+DEBUG:root:Order:2 1 30.0
+DEBUG:root:Order:12 1 4.0
+DEBUG:root:Bad order:12 2.0 5.0
+DEBUG:root:Order:18 5 2.0
+DEBUG:root:Order:9 5 14.0
+DEBUG:root:Order:11 5 5.0
+DEBUG:root:Order:17 5 2.0
+DEBUG:root:Order:0 5 3.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
 DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 14 3.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:5 9 1.0
+DEBUG:root:Order:6 9 2.0
+DEBUG:root:Bad order:6 7.0 8.0
+DEBUG:root:Order:1 0 2.0
+DEBUG:root:Bad order:1 4.0 5.0
+DEBUG:root:Order:12 2 6.0
+DEBUG:root:Order:18 2 1.0
+DEBUG:root:Order:18 17 2.0
+DEBUG:root:Order:11 17 5.0
+DEBUG:root:Order:2 17 5.0
+DEBUG:root:Bad order:2 1.0 5.0
+DEBUG:root:Order:17 11 2.0
+DEBUG:root:Order:0 11 3.0
+DEBUG:root:Order:9 11 1.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
 DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 5 18.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:6 20 21.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:5 9 1.0
+DEBUG:root:Order:6 9 5.0
+DEBUG:root:Bad order:6 3.0 7.0
+DEBUG:root:Order:1 0 5.0
+DEBUG:root:Bad order:1 4.0 8.0
+DEBUG:root:Order:12 18 5.0
+DEBUG:root:Order:17 18 2.0
+DEBUG:root:Order:11 18 1.0
+DEBUG:root:Order:11 2 5.0
+DEBUG:root:Order:2 2 5.0
+DEBUG:root:Order:18 2 1.0
 DEBUG:root:Order:0 2 3.0
-DEBUG:root:Order:0 10 24.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
+DEBUG:root:Order:9 2 4.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
 DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
 DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:6 9 17.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:13 6 10
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 1 8.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 9 9.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:6 0 8
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:6 3 13.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 14 10.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:13 6 14.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_neutral_planet_available
 DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:0 13 14.0
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
 DEBUG:root:Executing:Check: havent_lost_yet
 DEBUG:root:Result: Check: havent_lost_yet -> Success
 DEBUG:root:Executing:Check: if_neutral_planet_available
 DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:13 0 1
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:13 0 1
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 6 12.0
-DEBUG:root:Bad order:0 17.0 24.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:13 0 1
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:13 0 1
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 2 8.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 14 9.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Order:13 0 2
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 1 8.0
-DEBUG:root:Order:0 6 18.0
-DEBUG:root:Order:0 7 3.0
-DEBUG:root:Bad order:0 1.0 3.0
-DEBUG:root:Bad order:0 1.0 19.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 8 6.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 10 21.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Success
-DEBUG:root:Executing:Action: defend_planets
-DEBUG:root:Result: Action: defend_planets -> Success
-DEBUG:root:Result: Sequence: Defense Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Success
-DEBUG:root:Executing:Action: attack_enemy_planet_near
-DEBUG:root:Order:0 14 9.0
-DEBUG:root:Result: Action: attack_enemy_planet_near -> Success
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Success
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
-DEBUG:root:Finish turn
-
-DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_available
-DEBUG:root:Result: Check: if_enemy_planet_available -> Success
-DEBUG:root:Executing:Check: if_enemy_planet_near
-DEBUG:root:Result: Check: if_enemy_planet_near -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_available
-DEBUG:root:Result: Check: if_neutral_planet_available -> Success
-DEBUG:root:Executing:Check: if_neutral_planet_near
-DEBUG:root:Result: Check: if_neutral_planet_near -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
-DEBUG:root:Executing:Check: not_already_defending
-DEBUG:root:Result: Check: not_already_defending -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
 DEBUG:root:Executing:Check: any_other_planets
 DEBUG:root:Result: Check: any_other_planets -> Success
-DEBUG:root:Executing:Action: attack_not_mine
-DEBUG:root:Order:0 0 5
-DEBUG:root:Result: Action: attack_not_mine -> Success
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:5 9 1.0
+DEBUG:root:Order:6 9 8.0
+DEBUG:root:Order:6 0 17.0
+DEBUG:root:Bad order:6 1.0 21.0
+DEBUG:root:Bad order:6 1.0 24.0
+DEBUG:root:Bad order:6 1.0 24.0
+DEBUG:root:Bad order:6 1.0 25.0
+DEBUG:root:Bad order:6 1.0 25.0
+DEBUG:root:Order:1 2 8.0
+DEBUG:root:Order:2 2 4.0
+DEBUG:root:Bad order:2 7.0 10.0
+DEBUG:root:Order:18 1 2.0
+DEBUG:root:Order:12 1 5.0
+DEBUG:root:Order:17 1 2.0
+DEBUG:root:Order:11 1 4.0
+DEBUG:root:Order:0 1 3.0
+DEBUG:root:Order:9 1 7.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
 DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
 DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Failure
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:5 9 1.0
+DEBUG:root:Order:6 9 11.0
+DEBUG:root:Order:6 11 22.0
+DEBUG:root:Bad order:6 23.0 24.0
+DEBUG:root:Bad order:6 23.0 24.0
+DEBUG:root:Bad order:6 23.0 25.0
+DEBUG:root:Bad order:6 23.0 34.0
+DEBUG:root:Bad order:6 23.0 50.0
+DEBUG:root:Bad order:6 23.0 55.0
+DEBUG:root:Order:1 1 5.0
+DEBUG:root:Order:2 1 15.0
+DEBUG:root:Order:0 1 3.0
+DEBUG:root:Order:18 1 2.0
+DEBUG:root:Order:12 1 5.0
+DEBUG:root:Order:17 1 2.0
+DEBUG:root:Order:11 1 4.0
+DEBUG:root:Bad order:11 2.0 5.0
+DEBUG:root:Order:9 6 9.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
 DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Failure
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:5 9 1.0
+DEBUG:root:Order:6 9 15.0
+DEBUG:root:Order:6 12 24.0
+DEBUG:root:Bad order:6 10.0 24.0
+DEBUG:root:Bad order:6 10.0 25.0
+DEBUG:root:Bad order:6 10.0 34.0
+DEBUG:root:Bad order:6 10.0 40.0
+DEBUG:root:Bad order:6 10.0 45.0
+DEBUG:root:Bad order:6 10.0 48.0
+DEBUG:root:Order:1 1 10.0
+DEBUG:root:Order:11 1 9.0
+DEBUG:root:Order:2 1 5.0
+DEBUG:root:Order:0 1 3.0
+DEBUG:root:Order:18 1 2.0
+DEBUG:root:Order:12 1 5.0
+DEBUG:root:Order:17 1 2.0
+DEBUG:root:Order:9 1 3.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
 DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Failure
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:5 17 24.0
+DEBUG:root:Bad order:5 23.0 25.0
+DEBUG:root:Bad order:5 23.0 30.0
+DEBUG:root:Bad order:5 23.0 34.0
+DEBUG:root:Bad order:5 23.0 40.0
+DEBUG:root:Bad order:5 23.0 41.0
+DEBUG:root:Bad order:5 23.0 46.0
+DEBUG:root:Order:1 12 2.0
+DEBUG:root:Bad order:1 14.0 15.0
+DEBUG:root:Order:6 6 43.0
+DEBUG:root:Order:12 6 5.0
+DEBUG:root:Order:11 6 5.0
+DEBUG:root:Order:2 6 5.0
+DEBUG:root:Order:0 6 3.0
+DEBUG:root:Order:9 6 1.0
+DEBUG:root:Order:18 6 2.0
+DEBUG:root:Order:17 6 2.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
 DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Failure
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:5 18 25.0
+DEBUG:root:Bad order:5 17.0 30.0
+DEBUG:root:Bad order:5 17.0 34.0
+DEBUG:root:Bad order:5 17.0 40.0
+DEBUG:root:Bad order:5 17.0 41.0
+DEBUG:root:Bad order:5 17.0 41.0
+DEBUG:root:Order:1 17 7.0
+DEBUG:root:Bad order:1 12.0 18.0
+DEBUG:root:Order:6 12 32.0
+DEBUG:root:Bad order:6 13.0 44.0
+DEBUG:root:Order:12 6 5.0
+DEBUG:root:Order:17 6 2.0
+DEBUG:root:Order:11 6 5.0
+DEBUG:root:Order:2 6 5.0
+DEBUG:root:Order:0 6 3.0
+DEBUG:root:Order:9 6 1.0
+DEBUG:root:Order:18 6 2.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
 DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Failure
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:5 9 30.0
+DEBUG:root:Bad order:5 26.0 34.0
+DEBUG:root:Bad order:5 26.0 40.0
+DEBUG:root:Bad order:5 26.0 41.0
+DEBUG:root:Bad order:5 26.0 50.0
+DEBUG:root:Bad order:5 26.0 55.0
+DEBUG:root:Bad order:5 26.0 55.0
+DEBUG:root:Order:1 12 16.0
+DEBUG:root:Order:6 12 11.0
+DEBUG:root:Bad order:6 17.0 27.0
+DEBUG:root:Order:12 6 5.0
+DEBUG:root:Order:17 6 7.0
+DEBUG:root:Order:18 6 2.0
+DEBUG:root:Order:11 6 5.0
+DEBUG:root:Order:2 6 9.0
+DEBUG:root:Order:0 6 3.0
+DEBUG:root:Order:9 6 1.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: can_attack_neutral
+DEBUG:root:Result: Check: can_attack_neutral -> Failure
+DEBUG:root:Result: Sequence: Secondary Neutral Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Secondary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
+DEBUG:root:Executing:Check: havent_lost_yet
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Secondary Enemy Attack Sequence -> Failure
 DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
-DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Failure
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Action: defend_all_vulnerable
+DEBUG:root:Order:5 0 26.0
+DEBUG:root:Order:6 0 8.0
+DEBUG:root:Bad order:6 28.0 35.0
+DEBUG:root:Order:1 2 1.0
+DEBUG:root:Order:1 11 5.0
+DEBUG:root:Order:12 11 5.0
+DEBUG:root:Order:9 11 1.0
+DEBUG:root:Order:17 11 2.0
+DEBUG:root:Order:18 11 3.0
+DEBUG:root:Order:11 11 5.0
+DEBUG:root:Order:2 11 5.0
+DEBUG:root:Order:0 11 3.0
+DEBUG:root:Result: Action: defend_all_vulnerable -> Success
+DEBUG:root:Result: Sequence: Defense Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
 DEBUG:root:Executing:Selector: High Level Ordering of Strategies
-DEBUG:root:Executing:Sequence: Enemy Attack Sequence
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Enemy Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Neutral Attack Sequence
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Neutral Attack Sequence -> Failure
-DEBUG:root:Executing:Sequence: Defense Sequence
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+INFO:root:attack neutral (6, 19)
+DEBUG:root:Order:6 19 57.0
+INFO:root:attack neutral (6, 20)
+DEBUG:root:Bad order:6 5.0 57.0
+INFO:root:attack neutral (6, 21)
+DEBUG:root:Bad order:6 5.0 60.0
+INFO:root:attack neutral (6, 22)
+DEBUG:root:Bad order:6 5.0 60.0
+INFO:root:attack neutral (6, 13)
+DEBUG:root:Bad order:6 5.0 61.0
+INFO:root:attack neutral (6, 14)
+DEBUG:root:Bad order:6 5.0 61.0
+INFO:root:attack neutral (6, 15)
+DEBUG:root:Bad order:6 5.0 61.0
+INFO:root:attack neutral (6, 16)
+DEBUG:root:Bad order:6 5.0 61.0
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:5 9 24
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Failure
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Enemy Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Defense Sequence -> Failure
-DEBUG:root:Executing:Sequence: Do something semi-usefull
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_enemy
+DEBUG:root:Result: Check: should_attack_enemy -> Failure
+DEBUG:root:Result: Sequence: Primary Enemy Attack Sequence -> Failure
+DEBUG:root:Executing:Sequence: Primary Neutral Attack Sequence
+DEBUG:root:Executing:Check: any_other_planets
+DEBUG:root:Result: Check: any_other_planets -> Success
 DEBUG:root:Executing:Check: havent_lost_yet
-DEBUG:root:Result: Check: havent_lost_yet -> Failure
-DEBUG:root:Result: Sequence: Do something semi-usefull -> Failure
-DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Failure
+DEBUG:root:Result: Check: havent_lost_yet -> Success
+DEBUG:root:Executing:Check: if_neutral_planet_available
+DEBUG:root:Result: Check: if_neutral_planet_available -> Success
+DEBUG:root:Executing:Check: should_attack_neutral
+DEBUG:root:Result: Check: should_attack_neutral -> Success
+DEBUG:root:Executing:Action: best_neutral_attack
+DEBUG:root:Result: Action: best_neutral_attack -> Success
+DEBUG:root:Result: Sequence: Primary Neutral Attack Sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:5 9 27
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 9 28
+DEBUG:root:Order:2 9 28
+DEBUG:root:Order:5 9 28
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:11 9 30
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 9 31
+DEBUG:root:Order:5 9 31
+DEBUG:root:Order:12 9 31
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:0 9 31
+DEBUG:root:Order:12 9 31
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:11 9 31
+DEBUG:root:Order:12 9 31
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
+DEBUG:root:Finish turn
+
+DEBUG:root:Executing:Selector: High Level Ordering of Strategies
+DEBUG:root:Executing:Sequence: Do I have the advantage sequence
+DEBUG:root:Executing:Check: if_enemy_planet_available
+DEBUG:root:Result: Check: if_enemy_planet_available -> Success
+DEBUG:root:Executing:Check: opportunity_check
+DEBUG:root:Result: Check: opportunity_check -> Success
+DEBUG:root:Executing:Action: opportunity_attack
+DEBUG:root:Order:1 9 31
+DEBUG:root:Order:6 9 31
+DEBUG:root:Order:12 9 31
+DEBUG:root:Result: Action: opportunity_attack -> Success
+DEBUG:root:Result: Sequence: Do I have the advantage sequence -> Success
+DEBUG:root:Result: Selector: High Level Ordering of Strategies -> Success
 DEBUG:root:Finish turn
 
